@@ -18,7 +18,8 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="000-000-0000" />
+            android:hint="000-000-0000"
+            android:textSize="30dp"/>
     </LinearLayout>
 
     <LinearLayout

@@ -24,10 +24,10 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
-            setContentView(R.layout.activity_main);
+            setContentView(R.layout.ex_5_5);
             setTitle("테이블레이아웃 계산기");
 
-            // 지역 변수
+            // 지역 변수, 바인딩
             Edit1 = findViewById(R.id.Edit1);
             Edit2 = findViewById(R.id.Edit2);
             BtnNum0 = findViewById(R.id.BtnNum0);
@@ -46,13 +46,267 @@ public class MainActivity extends AppCompatActivity {
             BtnDiv = findViewById(R.id.BtnDiv);
             TextResult = findViewById(R.id.TextResult);
 
-            BtnNum0.setOnClickListener(new View.OnClickListener(){
-                @Override
-                public void onClick(View view) {
-                    num1 = BtnNum0.getText().toString();
+            // BtnNum 개별 버튼 10개를 1개의 객체배역에 넣고 배열 멤버로 만든다
+            // 객체 배열
+            Button btnNumArr[] = new Button[10];
+//            btnNumArr[0] = findViewById(R.id.BtnNum0);
+//            btnNumArr[1] = findViewById(R.id.BtnNum1);
+//            btnNumArr[2] = findViewById(R.id.BtnNum2);
+//            btnNumArr[3] = findViewById(R.id.BtnNum3);
+//            btnNumArr[4] = findViewById(R.id.BtnNum4);
+//            btnNumArr[5] = findViewById(R.id.BtnNum5);
+//            btnNumArr[6] = findViewById(R.id.BtnNum6);
+//            btnNumArr[7] = findViewById(R.id.BtnNum7);
+//            btnNumArr[8] = findViewById(R.id.BtnNum8);
+//            btnNumArr[9] = findViewById(R.id.BtnNum9);
 
-                }
-            });
+            // int nBtnArr[] = new int[10];
+            // int nBtnArr[] = {1,2,3,4,5,6,7,8};
+            int nBtnArr[] = {R.id.BtnNum0, R.id.BtnNum1, R.id.BtnNum2, R.id.BtnNum3,
+                            R.id.BtnNum4, R.id.BtnNum5, R.id.BtnNum6, R.id.BtnNum7,
+                            R.id.BtnNum8, R.id.BtnNum9};
+
+            for(int i=0; i<btnNumArr.length; ++i)
+            {
+                // btnNumArr[i] = findViewById(R.id.num + i);
+                btnNumArr[i] = findViewById(nBtnArr[i]);
+            }
+
+            for(int i=0; i<btnNumArr.length; ++i)
+            {
+                final int final_i = i;
+                btnNumArr[i].setOnClickListener(new View.OnClickListener(){
+                    @Override
+                    public void onClick(View view){
+                        if(Edit1.isFocused())
+                        {
+                            String str1 = Edit1.getText().toString()+ final_i;
+                            // str1 = str1 + "0";
+                            Edit1.setText(str1);
+                        }
+                        else if(Edit2.isFocused())
+                        {   String str2 = Edit2.getText().toString()+ final_i;
+                            // str1 = str1 + "0";
+                            Edit2.setText(str2);
+                        }
+                        else
+                        {
+                            Toast.makeText(getApplicationContext(),"에디트를 선택해 주세요", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+            }
+
+//            BtnNum0.setOnClickListener(new View.OnClickListener(){
+//                @Override
+//                public void onClick(View view){
+//                    if(Edit1.isFocused())
+//                    {
+//                        String str1 = Edit1.getText().toString()+ "0";
+//                        // str1 = str1 + "0";
+//                        Edit1.setText(str1);
+//                    }
+//                    else if(Edit2.isFocused())
+//                    {   String str2 = Edit2.getText().toString()+ "0";
+//                        // str1 = str1 + "0";
+//                        Edit2.setText(str2);
+//                    }
+//                    else
+//                    {
+//                    Toast.makeText(getApplicationContext(),"에디트를 선택해 주세요", Toast.LENGTH_SHORT).show();
+//                    }
+//                }
+//            });
+//
+//            BtnNum1.setOnClickListener(new View.OnClickListener(){
+//                @Override
+//                public void onClick(View view){
+//                    if(Edit1.isFocused())
+//                    {
+//                        String str1 = Edit1.getText().toString()+ "1";
+//                        // str1 = str1 + "0";
+//                        Edit1.setText(str1);
+//                    }
+//                    else if(Edit2.isFocused())
+//                    {   String str2 = Edit2.getText().toString()+ "1";
+//                        // str1 = str1 + "0";
+//                        Edit2.setText(str2);
+//                    }
+//                    else
+//                    {
+//                        Toast.makeText(getApplicationContext(),"에디트를 선택해 주세요", Toast.LENGTH_SHORT).show();
+//                    }
+//                }
+//            });
+//
+//            BtnNum2.setOnClickListener(new View.OnClickListener(){
+//                @Override
+//                public void onClick(View view){
+//                    if(Edit1.isFocused())
+//                    {
+//                        String str1 = Edit1.getText().toString()+ "2";
+//                        // str1 = str1 + "0";
+//                        Edit1.setText(str1);
+//                    }
+//                    else if(Edit2.isFocused())
+//                    {   String str2 = Edit2.getText().toString()+ "2";
+//                        // str1 = str1 + "0";
+//                        Edit2.setText(str2);
+//                    }
+//                    else
+//                    {
+//                        Toast.makeText(getApplicationContext(),"에디트를 선택해 주세요", Toast.LENGTH_SHORT).show();
+//                    }
+//                }
+//            });
+//
+//            BtnNum3.setOnClickListener(new View.OnClickListener(){
+//                @Override
+//                public void onClick(View view){
+//                    if(Edit1.isFocused())
+//                    {
+//                        String str1 = Edit1.getText().toString()+ "3";
+//                        // str1 = str1 + "0";
+//                        Edit1.setText(str1);
+//                    }
+//                    else if(Edit2.isFocused())
+//                    {   String str2 = Edit2.getText().toString()+ "3";
+//                        // str1 = str1 + "0";
+//                        Edit2.setText(str2);
+//                    }
+//                    else
+//                    {
+//                        Toast.makeText(getApplicationContext(),"에디트를 선택해 주세요", Toast.LENGTH_SHORT).show();
+//                    }
+//                }
+//            });
+//
+//            BtnNum4.setOnClickListener(new View.OnClickListener(){
+//                @Override
+//                public void onClick(View view){
+//                    if(Edit1.isFocused())
+//                    {
+//                        String str1 = Edit1.getText().toString()+ "4";
+//                        // str1 = str1 + "0";
+//                        Edit1.setText(str1);
+//                    }
+//                    else if(Edit2.isFocused())
+//                    {   String str2 = Edit2.getText().toString()+ "4";
+//                        // str1 = str1 + "0";
+//                        Edit2.setText(str2);
+//                    }
+//                    else
+//                    {
+//                        Toast.makeText(getApplicationContext(),"에디트를 선택해 주세요", Toast.LENGTH_SHORT).show();
+//                    }
+//                }
+//            });
+//
+//            BtnNum5.setOnClickListener(new View.OnClickListener(){
+//                @Override
+//                public void onClick(View view){
+//                    if(Edit1.isFocused())
+//                    {
+//                        String str1 = Edit1.getText().toString()+ "5";
+//                        // str1 = str1 + "0";
+//                        Edit1.setText(str1);
+//                    }
+//                    else if(Edit2.isFocused())
+//                    {   String str2 = Edit2.getText().toString()+ "5";
+//                        // str1 = str1 + "0";
+//                        Edit2.setText(str2);
+//                    }
+//                    else
+//                    {
+//                        Toast.makeText(getApplicationContext(),"에디트를 선택해 주세요", Toast.LENGTH_SHORT).show();
+//                    }
+//                }
+//            });
+//
+//            BtnNum6.setOnClickListener(new View.OnClickListener(){
+//                @Override
+//                public void onClick(View view){
+//                    if(Edit1.isFocused())
+//                    {
+//                        String str1 = Edit1.getText().toString()+ "6";
+//                        // str1 = str1 + "0";
+//                        Edit1.setText(str1);
+//                    }
+//                    else if(Edit2.isFocused())
+//                    {   String str2 = Edit2.getText().toString()+ "6";
+//                        // str1 = str1 + "0";
+//                        Edit2.setText(str2);
+//                    }
+//                    else
+//                    {
+//                        Toast.makeText(getApplicationContext(),"에디트를 선택해 주세요", Toast.LENGTH_SHORT).show();
+//                    }
+//                }
+//            });
+//
+//            BtnNum7.setOnClickListener(new View.OnClickListener(){
+//                @Override
+//                public void onClick(View view){
+//                    if(Edit1.isFocused())
+//                    {
+//                        String str1 = Edit1.getText().toString()+ "7";
+//                        // str1 = str1 + "0";
+//                        Edit1.setText(str1);
+//                    }
+//                    else if(Edit2.isFocused())
+//                    {   String str2 = Edit2.getText().toString()+ "7";
+//                        // str1 = str1 + "0";
+//                        Edit2.setText(str2);
+//                    }
+//                    else
+//                    {
+//                        Toast.makeText(getApplicationContext(),"에디트를 선택해 주세요", Toast.LENGTH_SHORT).show();
+//                    }
+//                }
+//            });
+//
+//            BtnNum8.setOnClickListener(new View.OnClickListener(){
+//                @Override
+//                public void onClick(View view){
+//                    if(Edit1.isFocused())
+//                    {
+//                        String str1 = Edit1.getText().toString()+ "8";
+//                        // str1 = str1 + "0";
+//                        Edit1.setText(str1);
+//                    }
+//                    else if(Edit2.isFocused())
+//                    {   String str2 = Edit2.getText().toString()+ "8";
+//                        // str1 = str1 + "0";
+//                        Edit2.setText(str2);
+//                    }
+//                    else
+//                    {
+//                        Toast.makeText(getApplicationContext(),"에디트를 선택해 주세요", Toast.LENGTH_SHORT).show();
+//                    }
+//                }
+//            });
+//
+//            BtnNum9.setOnClickListener(new View.OnClickListener(){
+//                @Override
+//                public void onClick(View view){
+//                    if(Edit1.isFocused())
+//                    {
+//                        String str1 = Edit1.getText().toString()+ "9";
+//                        // str1 = str1 + "0";
+//                        Edit1.setText(str1);
+//                    }
+//                    else if(Edit2.isFocused())
+//                    {   String str2 = Edit2.getText().toString()+ "9";
+//                        // str1 = str1 + "0";
+//                        Edit2.setText(str2);
+//                    }
+//                    else
+//                    {
+//                        Toast.makeText(getApplicationContext(),"에디트를 선택해 주세요", Toast.LENGTH_SHORT).show();
+//                    }
+//                }
+//            });
+
 
             BtnAdd.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -119,23 +373,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
 
-            BtnMod.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    num1 = Edit1.getText().toString();
-                    num2 = Edit2.getText().toString();
-                    if (num1.equals("") || num2.equals("")) {
-                        Toast.makeText(MainActivity.this, "숫자를 입력하세요.", Toast.LENGTH_SHORT).show();
-                        TextResult.setText("계산 결과: ");
-                    } else if (num1.equals("0") || num2.equals("0")) {
-                        Toast.makeText(MainActivity.this, "계산 오류", Toast.LENGTH_SHORT).show();
-                        TextResult.setText("계산 결과: ");
-                    } else {
-                        result1 = Float.parseFloat(num1) % Float.parseFloat(num2);
-                        TextResult.setText("계산 결과: " + result1);
-                    }
-                }
-            });
         }
     }
 
